@@ -17,9 +17,9 @@ FROM (
     sum(ct_amt) account_daily_total,
     batchid
   FROM (
-    SELECT * , 1 batchid
-    FROM {{ source('tpcdi', 'CashTransactionHistory') }}
-    UNION ALL
+    -- SELECT * , 1 batchid
+    -- FROM {{ source('tpcdi', 'CashTransactionHistory') }}
+    -- UNION ALL
     SELECT * exclude (cdc_flag, cdc_dsn)
     FROM {{ ref('CashTransactionIncremental') }}
   )

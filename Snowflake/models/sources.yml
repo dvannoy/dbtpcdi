@@ -4,13 +4,13 @@ version: 2
 
 sources:
   - name: tpcdi
-    database: tpcdi_sf1000
-    schema: rsstgtest
+    database: "{{var('stagingcatalog')}}"
+    schema: "{{var('stagingschema')}}"
     tables:
 
       - name: StatusType
         external:
-          location: "@{{var('stage')}}/Batch1"
+          location: "@{{var('tpcdi_directory')}}/Batch1"
           pattern: '.*StatusType[.]txt'
           file_format: "( format_name = 'TXT_PIPE')"
 
@@ -26,7 +26,7 @@ sources:
 
       - name: TaxRate
         external:
-          location: "@{{var('stage')}}/Batch1"
+          location: "@{{var('tpcdi_directory')}}/Batch1"
           pattern: '.*TaxRate[.]txt'
           file_format: "( format_name = 'TXT_PIPE')"
 
@@ -46,7 +46,7 @@ sources:
 
       - name: DimTime
         external:
-          location: "@{{var('stage')}}/Batch1"
+          location: "@{{var('tpcdi_directory')}}/Batch1"
           pattern: '.*Time[.]txt'
           file_format: "( format_name = 'TXT_PIPE')"
 
@@ -95,7 +95,7 @@ sources:
 
       - name: AccountIncrementaldos
         external:
-          location: "@{{var('stage')}}/Batch2"
+          location: "@{{var('tpcdi_directory')}}/Batch2"
           pattern: '.*Account[.]txt'
           file_format: "( format_name = 'TXT_PIPE')"
 
@@ -135,7 +135,7 @@ sources:
 
       - name: AccountIncrementaltres
         external:
-          location: "@{{var('stage')}}/Batch3"
+          location: "@{{var('tpcdi_directory')}}/Batch3"
           pattern: '.*Account[.]txt'
           file_format: "( format_name = 'TXT_PIPE')"
 
@@ -175,7 +175,7 @@ sources:
 
       - name: CashTransactionHistory
         external:
-          location: "@{{var('stage')}}/Batch1"
+          location: "@{{var('tpcdi_directory')}}/Batch1"
           pattern: '.*CashTransaction[.]txt'
           file_format: "( format_name = 'TXT_PIPE')"
 
@@ -199,7 +199,7 @@ sources:
 
       - name: CashTransactionIncrementaldos
         external:
-          location: "@{{var('stage')}}/Batch2"
+          location: "@{{var('tpcdi_directory')}}/Batch2"
           pattern: '.*CashTransaction[.]txt'
           file_format: "( format_name = 'TXT_PIPE')"
 
@@ -231,7 +231,39 @@ sources:
 
       - name: CashTransactionIncrementaltres
         external:
-          location: "@{{var('stage')}}/Batch3"
+          location: "@{{var('tpcdi_directory')}}/Batch3"
+          pattern: '.*CashTransaction[.]txt'
+          file_format: "( format_name = 'TXT_PIPE')"
+
+        columns:
+          - name: cdc_flag
+            data_type: string
+            description: "abc"
+            index: c1
+          - name: cdc_dsn
+            data_type: bigint
+            description: "abc"
+            index: c2
+          - name: ct_ca_id
+            data_type: bigint
+            description: "abc"
+            index: c3
+          - name: ct_dts
+            data_type: timestamp
+            description: "abc"
+            index: c4
+          - name: ct_amt
+            data_type: double
+            description: "abc"
+            index: c5
+          - name: ct_name
+            data_type: string
+            description: "abc"
+            index: c6
+
+      - name: CashTransactionIncrementalcuatro
+        external:
+          location: "@{{var('tpcdi_directory')}}/Batch4"
           pattern: '.*CashTransaction[.]txt'
           file_format: "( format_name = 'TXT_PIPE')"
 
@@ -263,7 +295,7 @@ sources:
 
       - name: customerincrementaldos
         external:
-          location: "@{{var('stage')}}/Batch2"
+          location: "@{{var('tpcdi_directory')}}/Batch2"
           pattern: '.*Customer[.]txt'
           file_format: "( format_name = 'TXT_PIPE')"
 
@@ -423,7 +455,7 @@ sources:
 
       - name: customerincrementaltres
         external:
-          location: "@{{var('stage')}}/Batch3"
+          location: "@{{var('tpcdi_directory')}}/Batch3"
           pattern: '.*Customer[.]txt'
           file_format: "( format_name = 'TXT_PIPE')"
 
@@ -583,7 +615,7 @@ sources:
 
       - name: DailyMarketHistorical
         external:
-          location: "@{{var('stage')}}/Batch1"
+          location: "@{{var('tpcdi_directory')}}/Batch1"
           pattern: '.*DailyMarket[.]txt'
           file_format: "( format_name = 'TXT_PIPE')"
 
@@ -615,7 +647,7 @@ sources:
 
       - name: DailyMarketIncrementaldos
         external:
-          location: "@{{var('stage')}}/Batch2"
+          location: "@{{var('tpcdi_directory')}}/Batch2"
           pattern: '.*DailyMarket[.]txt'
           file_format: "( format_name = 'TXT_PIPE')"
 
@@ -655,7 +687,7 @@ sources:
 
       - name: DailyMarketIncrementaltres
         external:
-          location: "@{{var('stage')}}/Batch3"
+          location: "@{{var('tpcdi_directory')}}/Batch3"
           pattern: '.*DailyMarket[.]txt'
           file_format: "( format_name = 'TXT_PIPE')"
 
@@ -695,7 +727,7 @@ sources:
 
       - name: DimDate
         external:
-          location: "@{{var('stage')}}/Batch1"
+          location: "@{{var('tpcdi_directory')}}/Batch1"
           pattern: '.*[/]Date[.]txt'
           file_format: "( format_name = 'TXT_PIPE')"
 
@@ -775,7 +807,7 @@ sources:
 
       - name: HR
         external:
-          location: "@{{var('stage')}}/Batch1"
+          location: "@{{var('tpcdi_directory')}}/Batch1"
           pattern: '.*HR[.]csv'
           file_format: "( format_name = 'TXT_CSV')"
 
@@ -819,7 +851,7 @@ sources:
 
       - name: HoldingHistory
         external:
-          location: "@{{var('stage')}}/Batch1"
+          location: "@{{var('tpcdi_directory')}}/Batch1"
           pattern: '.*HoldingHistory[.]txt'
           file_format: "( format_name = 'TXT_PIPE')"
 
@@ -843,7 +875,7 @@ sources:
 
       - name: HoldingIncrementaldos
         external:
-          location: "@{{var('stage')}}/Batch2"
+          location: "@{{var('tpcdi_directory')}}/Batch2"
           pattern: '.*HoldingHistory[.]txt'
           file_format: "( format_name = 'TXT_PIPE')"
 
@@ -875,7 +907,7 @@ sources:
 
       - name: HoldingIncrementaltres
         external:
-          location: "@{{var('stage')}}/Batch3"
+          location: "@{{var('tpcdi_directory')}}/Batch3"
           pattern: '.*HoldingHistory[.]txt'
           file_format: "( format_name = 'TXT_PIPE')"
 
@@ -907,7 +939,7 @@ sources:
 
       - name: BatchDateuno
         external:
-          location: "@{{var('stage')}}/Batch1"
+          location: "@{{var('tpcdi_directory')}}/Batch1"
           pattern: '.*BatchDate[.]txt'
           file_format: "( format_name = 'TXT_PIPE')"
 
@@ -919,7 +951,7 @@ sources:
 
       - name: BatchDatedos
         external:
-          location: "@{{var('stage')}}/Batch2"
+          location: "@{{var('tpcdi_directory')}}/Batch2"
           pattern: '.*BatchDate[.]txt'
           file_format: "( format_name = 'TXT_PIPE')"
 
@@ -931,7 +963,7 @@ sources:
 
       - name: BatchDatetres
         external:
-          location: "@{{var('stage')}}/Batch3"
+          location: "@{{var('tpcdi_directory')}}/Batch3"
           pattern: '.*BatchDate[.]txt'
           file_format: "( format_name = 'TXT_PIPE')"
 
@@ -943,7 +975,7 @@ sources:
 
       - name: Industry
         external:
-          location: "@{{var('stage')}}/Batch1"
+          location: "@{{var('tpcdi_directory')}}/Batch1"
           pattern: '.*Industry[.]txt'
           file_format: "( format_name = 'TXT_PIPE')"
 
@@ -963,7 +995,7 @@ sources:
 
       - name: TradeHistory
         external:
-          location: "@{{var('stage')}}/Batch1"
+          location: "@{{var('tpcdi_directory')}}/Batch1"
           pattern: '.*Trade[.]txt'
           file_format: "( format_name = 'TXT_PIPE')"
 
@@ -1027,7 +1059,7 @@ sources:
 
       - name: TradeHistoryRaw
         external:
-          location: "@{{var('stage')}}/Batch1"
+          location: "@{{var('tpcdi_directory')}}/Batch1"
           pattern: '.*TradeHistory[.]txt'
           file_format: "( format_name = 'TXT_PIPE')"
 
@@ -1047,7 +1079,7 @@ sources:
 
       - name: TradeIncrementaldos
         external:
-          location: "@{{var('stage')}}/Batch2"
+          location: "@{{var('tpcdi_directory')}}/Batch2"
           pattern: '.*TradeHistory[.]txt'
           file_format: "( format_name = 'TXT_PIPE')"
 
@@ -1119,7 +1151,7 @@ sources:
 
       - name: TradeIncrementaltres
         external:
-          location: "@{{var('stage')}}/Batch3"
+          location: "@{{var('tpcdi_directory')}}/Batch3"
           pattern: '.*TradeHistory[.]txt'
           file_format: "( format_name = 'TXT_PIPE')"
 
@@ -1191,7 +1223,7 @@ sources:
 
       - name: TradeType
         external:
-          location: "@{{var('stage')}}/Batch1"
+          location: "@{{var('tpcdi_directory')}}/Batch1"
           pattern: '.*TradeType[.]txt'
           file_format: "( format_name = 'TXT_PIPE')"
 
@@ -1215,7 +1247,7 @@ sources:
 
       - name: WatchIncrementaldos
         external:
-          location: "@{{var('stage')}}/Batch2"
+          location: "@{{var('tpcdi_directory')}}/Batch2"
           pattern: '.*WatchHistory[.]txt'
           file_format: "( format_name = 'TXT_PIPE')"
 
@@ -1247,7 +1279,7 @@ sources:
 
       - name: WatchIncrementaltres
         external:
-          location: "@{{var('stage')}}/Batch3"
+          location: "@{{var('tpcdi_directory')}}/Batch3"
           pattern: '.*WatchHistory[.]txt'
           file_format: "( format_name = 'TXT_PIPE')"
 
@@ -1279,7 +1311,7 @@ sources:
 
       - name: WatchHistory
         external:
-          location: "@{{var('stage')}}/Batch1"
+          location: "@{{var('tpcdi_directory')}}/Batch1"
           pattern: '.*WatchHistory[.]txt'
           file_format: "( format_name = 'TXT_PIPE')"
 
@@ -1303,7 +1335,7 @@ sources:
 
       - name: ProspectRawuno
         external:
-          location: "@{{var('stage')}}/Batch1"
+          location: "@{{var('tpcdi_directory')}}/Batch1"
           pattern: '.*Prospect[.]csv'
           file_format: "( format_name = 'TXT_CSV')"
 
@@ -1399,7 +1431,7 @@ sources:
 
       - name: ProspectRawdos
         external:
-          location: "@{{var('stage')}}/Batch2"
+          location: "@{{var('tpcdi_directory')}}/Batch2"
           pattern: '.*Prospect[.]csv'
           file_format: "( format_name = 'TXT_CSV')"
 
@@ -1495,7 +1527,7 @@ sources:
 
       - name: ProspectRawtres
         external:
-          location: "@{{var('stage')}}/Batch3"
+          location: "@{{var('tpcdi_directory')}}/Batch3"
           pattern: '.*Prospect[.]csv'
           file_format: "( format_name = 'TXT_CSV')"
 
