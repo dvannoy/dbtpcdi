@@ -1,6 +1,6 @@
 {{
     config(
-        materialized = 'table'
+        materialized = 'streaming_table'
     )
 }}
 SELECT

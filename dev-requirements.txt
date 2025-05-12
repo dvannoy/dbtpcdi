@@ -7,3 +7,4 @@ flake8>=6,<7
 jupyter-black>=0,<1
 sqlfluff>=2.2,<2.3
 yamllint>=1,<2
+databricks-sdk[notebook]>=0.47.0

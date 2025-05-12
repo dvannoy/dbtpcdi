@@ -1,0 +1,9 @@
+{
+    "views": {
+        "CustomerMgmt": {
+            "rowTag": "TPCDI:Action",
+            "path": "Batch1",
+            "filename": "CustomerMgmt.xml"  
+        }
+    }
+}

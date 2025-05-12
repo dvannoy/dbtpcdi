@@ -1,7 +1,7 @@
 ---
 
 sql_endpoints:
-  target: snowflake #databricks
+  target: databricks
 
   outputs:
     redshift:
@@ -31,7 +31,6 @@ sql_endpoints:
       database: "{{ env_var('SNOWFLAKE_TEST_DATABASE') }}"
       warehouse: "{{ env_var('SNOWFLAKE_TEST_WAREHOUSE') }}"
       schema: "{{ env_var('SNOWFLAKE_TEST_SCHEMA') }}"
-      #schema: audit_helper_integration_tests_snowflake
       threads: 25
 
     databricks:

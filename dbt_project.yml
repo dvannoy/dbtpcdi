@@ -7,20 +7,19 @@ config-version: 2
 profile: 'sql_endpoints'
 
 vars:
-  # tpcdi_directory: /Volumes/tpcdi/tpcdi_raw_data/tpcdi_volume/
-  tpcdi_directory: UC_WESTUS_TPCDI_FILES/sf=10/
+  tpcdi_directory: "/Volumes/tpcdi/tpcdi_raw_data/tpcdi_volume/"
   scalefactor: 10
   benchmark: 10
   stage: stagename
   stagingcatalog: main
-  stagingschema: tpcdi_staging
+  stagingschema: dbtpcdi_staging
   bucketname: bucketname  # bigquery, redshift only
   storageaccountname: synapsemigrationdemoadls
   catalog: main
   prodschema: dbtpcdi_prod
 
-# model-paths: ["Databricks/models/main"]
-model-paths: ["Snowflake/models"]
+model-paths: ["Databricks/models/main"]
+# model-paths: ["Snowflake/models"]
 analysis-paths: ["analyses"]
 test-paths: ["tests"]
 seed-paths: ["seeds"]

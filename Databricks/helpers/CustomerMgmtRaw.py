@@ -13,20 +13,23 @@
 
 import json
 
-with open("../../tools/traditional_config.json", "r") as json_conf:
+with open("traditional_config.json", "r") as json_conf:
     table_conf = json.load(json_conf)["views"]["CustomerMgmt"]
 user_name = (
     spark.sql("select current_user()").collect()[0][0].split("@")[0].replace(".", "_")
 )
 
-dbutils.widgets.text("wh_db", f"{user_name}_TPCDI", "Root name of Target Warehouse")
+dbutils.widgets.text("catalog", f"{user_name}_TPCDI", "Name of Target Catalog")
+dbutils.widgets.text("database", f"{user_name}_TPCDI_stage", "Name of Target Database/Schema")
 dbutils.widgets.text(
     "tpcdi_directory", "/tmp/tpcdi/", "Directory where Raw Files are located"
 )
 dbutils.widgets.text("scale_factor", "10", "Scale factor")
 
-wh_db = f"{dbutils.widgets.get('wh_db')}_wh"
-staging_db = f"{dbutils.widgets.get('wh_db')}_stage"
+# COMMAND ----------
+
+wh_db = f"{dbutils.widgets.get('catalog')}_wh"
+staging_db = f"{dbutils.widgets.get('database')}"
 scale_factor = dbutils.widgets.get("scale_factor")
 tpcdi_directory = dbutils.widgets.get("tpcdi_directory")
 files_directory = f"{tpcdi_directory}sf={scale_factor}"
@@ -68,7 +71,7 @@ spark.sql(
     nullif(Customer.Name.C_F_NAME, '') firstname,
     nullif(Customer.Name.C_M_NAME, '') middleinitial,
     nullif(upper(Customer._C_GNDR), '') gender,
-    cast(Customer._C_TIER as TINYINT) tier,
+    try_cast(Customer._C_TIER as TINYINT) tier,
     cast(Customer._C_DOB as DATE) dob,
     nullif(Customer.Address.C_ADLINE1, '') addressline1,
     nullif(Customer.Address.C_ADLINE2, '') addressline2,
