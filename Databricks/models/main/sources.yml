@@ -1,7 +1,5 @@
 version: 2
 
-
-
 sources:
   - name: tpcdi
     catalog: "{{var('stagingcatalog')}}"
@@ -11,6 +9,7 @@ sources:
       - name: StatusType
         external:
           location: /Volumes/tpcdi/tpcdi_raw_data/tpcdi_volume/sf={{var("benchmark")}}/Batch1/StatusType.txt   # hdfs://, s3://, azure://, dbfs://, ...
+          # abfss://datakickstart-demo-uswest@dkdbdevstorageaccuc.dfs.core.windows.net/
           using: csv
 
           options:                           # as needed
